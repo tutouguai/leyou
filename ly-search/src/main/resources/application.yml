@@ -1,0 +1,23 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: search-service
+  data:
+    elasticsearch:
+#      rest:
+#        uris: http://192.168.77.131:9200
+      client:
+        reactive:
+          endpoints: 192.168.77.131:9200 # 9300
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+  instance:
+    lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
+    lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
+#    prefer-ip-address: true
+#    ip-address: 127.0.0.1
