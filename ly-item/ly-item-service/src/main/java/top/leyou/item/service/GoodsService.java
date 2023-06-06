@@ -17,4 +17,5 @@ public interface GoodsService {
     List<Sku> querySkuBySpuId(Long spuId);
 
     void updateGoods(Spu spu);
+    public Spu querySpuById(Long id);
 }

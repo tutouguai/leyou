@@ -197,6 +197,18 @@ public class GoodsServiceImpl implements GoodsService {
         saveSkuAndStock(spu);
     }
 
+    @Override
+    public Spu querySpuById(Long id) {
+        Spu spu = spuMapper.selectByPrimaryKey(id);
+        if(spu == null)
+            throw new LyException(ExceptionEnum.GOODS_NOT_FOUND);
+        //查询sku
+        spu.setSkus(querySkuBySpuId(id));
+        //查询spuDetails
+        spu.setSpuDetail(querySpuDetailBySpuId(id));
+        return spu;
+    }
+
     private void loadCategoryAndBrandName(List<Spu> spus){
         for (Spu spu : spus) {
             //处理分类名称

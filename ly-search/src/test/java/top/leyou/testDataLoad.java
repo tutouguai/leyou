@@ -4,6 +4,7 @@ package top.leyou;
 import org.elasticsearch.client.ElasticsearchClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @SpringBootTest
 public class testDataLoad {
 
-    @Resource
+    @Autowired
     private GoodsRepository goodsRepository;
 
     @Resource
@@ -54,8 +55,9 @@ public class testDataLoad {
                     .map(searchService::buildGoods).collect(Collectors.toList());
 
             //存入索引库
-            goodsRepository.saveAll(goodsList);
+//            goodsRepository.saveAll(goodsList);
 
+            elasticsearchRestTemplate.save(goodsList);
             //翻页
             page++;
             size = SpuList.size();

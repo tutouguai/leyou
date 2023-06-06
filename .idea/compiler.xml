@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ly-page" />
         <module name="ly-item-interface" />
         <module name="ly-gateway" />
         <module name="ly-search" />
@@ -29,6 +30,7 @@
       <module name="ly-gatway" options="-parameters" />
       <module name="ly-item-interface" options="-parameters" />
       <module name="ly-item-service" options="-parameters" />
+      <module name="ly-page" options="-parameters" />
       <module name="ly-registry" options="-parameters" />
       <module name="ly-search" options="-parameters" />
       <module name="ly-upload" options="-parameters" />

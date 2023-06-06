@@ -57,4 +57,26 @@ public class SpecificationServiceImpl implements SpecificationService {
         }
         return select;
     }
+
+    @Override
+    public List<SpecGroup> queryListByCid(Long cid) {
+        //查询规格组
+        List<SpecGroup> specGroups = queryGroupByCid(cid);
+        //查询当前分类下参数
+        List<SpecParam> specParams = queryParamList(null, cid, null);
+        //先把规格参数变为map, <groupId, params>
+        Map<Long, List<SpecParam>> params  = new HashMap<>();
+        for (SpecParam specParam : specParams) {
+            if(!params.containsKey(specParam.getGroupId())){
+                //不存在则创建新list
+                params.put(specParam.getGroupId(), new ArrayList<>());
+            }
+            params.get(specParam.getGroupId()).add(specParam);
+        }
+        //填充params到groups中
+        for (SpecGroup specGroup : specGroups) {
+            specGroup.setParams(params.get(specGroup.getId()));
+        }
+        return null;
+    }
 }

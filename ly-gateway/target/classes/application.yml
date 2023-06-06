@@ -10,6 +10,12 @@ spring:
           enabled: true # 开启从注册中心动态创建路由的功能，利用微服务名进行路由
           lower-case-service-id: true
       routes:
+        - id: search-service
+          uri: lb://search-service
+          predicates:
+            - Path=/api/search/**
+          filters:
+            - StripPrefix=2
         - id: item-service
           uri: lb://item-service
           predicates:
@@ -22,25 +28,23 @@ spring:
             - Path=/api/upload/**
           filters:
             - StripPrefix=1
-##      filter:
-#        retry:
-#          enabled: true
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://manage.leyou.com"
-              - "http://api.leyou.com"
-            allowedMethods:
-              - "OPTIONS"
-              - "HEAD"
-              - "GET"
-              - "PUT"
-              - "POST"
-              - "DELETE"
-              - "PATCH"
-            allowedHeaders: "*"
-            allowCredentials: true
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins:
+#              - "http://manage.leyou.com"
+#              - "http://www.leyou.com"
+##              - "http://api.leyou.com"
+#            allowedMethods:
+#              - "OPTIONS"
+#              - "HEAD"
+#              - "GET"
+#              - "PUT"
+#              - "POST"
+#              - "DELETE"
+#              - "PATCH"
+#            allowedHeaders: "*"
+#            allowCredentials: true
 eureka:
   client:
     service-url:

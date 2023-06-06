@@ -34,5 +34,8 @@ public class SpecificationController {
                                                           @RequestParam(value = "searching", required = false) Boolean searching){
         return ResponseEntity.ok(specService.queryParamList(gid, cid, searching));
     }
-
+    @GetMapping("spec/groups")
+    ResponseEntity<List<SpecGroup>> queryListByCid(@RequestParam("cid") Long cid){
+        return ResponseEntity.ok(specService.queryListByCid(cid));
+    }
 }
